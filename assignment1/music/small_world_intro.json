@@ -1,0 +1,128 @@
+[
+    {
+        "vol": 127, 
+        "duration": 0.806707317, 
+        "startTime": 0.0, 
+        "pitch": 60
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.806707317, 
+        "startTime": 0.0, 
+        "pitch": 65
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.268902439, 
+        "startTime": 0.806707317, 
+        "pitch": 60
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.268902439, 
+        "startTime": 0.806707317, 
+        "pitch": 65
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.537804878, 
+        "startTime": 1.075609756, 
+        "pitch": 63
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.537804878, 
+        "startTime": 1.075609756, 
+        "pitch": 69
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.2689024390000001, 
+        "startTime": 1.613414634, 
+        "pitch": 63
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.537804878, 
+        "startTime": 1.613414634, 
+        "pitch": 69
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.8067073169999999, 
+        "startTime": 2.151219512, 
+        "pitch": 62
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.8067073169999999, 
+        "startTime": 2.151219512, 
+        "pitch": 65
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.2689024390000001, 
+        "startTime": 2.957926829, 
+        "pitch": 62
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.2689024390000001, 
+        "startTime": 2.957926829, 
+        "pitch": 65
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.5378048780000002, 
+        "startTime": 3.226829268, 
+        "pitch": 62
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.5378048780000002, 
+        "startTime": 3.226829268, 
+        "pitch": 65
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.5378048779999998, 
+        "startTime": 3.764634146, 
+        "pitch": 62
+    }, 
+    {
+        "vol": 127, 
+        "duration": 0.5378048779999998, 
+        "startTime": 3.764634146, 
+        "pitch": 65
+    }, 
+    {
+        "vol": 127, 
+        "duration": 1.0756097560000004, 
+        "startTime": 4.302439024, 
+        "pitch": 60
+    }, 
+    {
+        "vol": 127, 
+        "duration": 1.0756097560000004, 
+        "startTime": 4.302439024, 
+        "pitch": 76
+    }, 
+    {
+        "vol": 127, 
+        "duration": 1.0756097569999996, 
+        "startTime": 5.37804878, 
+        "pitch": 58
+    }, 
+    {
+        "vol": 127, 
+        "duration": 2.6890243910000002, 
+        "startTime": 5.37804878, 
+        "pitch": 60
+    }, 
+    {
+        "vol": 127, 
+        "duration": 1.6134146340000006, 
+        "startTime": 6.453658537, 
+        "pitch": 57
+    }
+]

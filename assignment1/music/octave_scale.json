@@ -1,0 +1,50 @@
+[
+    {
+        "vol": 127,
+        "duration": 3.0,
+        "startTime": 0.0,
+        "pitch": 24
+    },
+    {
+        "vol": 127,
+        "duration": 3.0,
+        "startTime": 3.0,
+        "pitch": 36
+    },
+    {
+        "vol": 127,
+        "duration": 3.0,
+        "startTime": 6.0,
+        "pitch": 48
+    },
+    {
+        "vol": 127,
+        "duration": 3.0,
+        "startTime": 9.0,
+        "pitch": 60
+    },
+    {
+        "vol": 127,
+        "duration": 3.0,
+        "startTime": 12.0,
+        "pitch": 72
+    },
+    {
+        "vol": 127,
+        "duration": 3.0,
+        "startTime": 15.0,
+        "pitch": 84
+    },
+    {
+        "vol": 127,
+        "duration": 3.0,
+        "startTime": 18.0,
+        "pitch": 96
+    },
+    {
+        "vol": 127,
+        "duration": 3.0,
+        "startTime": 21.0,
+        "pitch": 108
+    }
+]
