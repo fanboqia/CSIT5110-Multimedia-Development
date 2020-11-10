@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="lib/bootstrap-4.4.1.min.css">
+    <link rel="stylesheet" href="lib/bootstrap4-toggle-3.6.0.min.css">  
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <title>CSIT5110 Tree Generator</title>
+
+    <style>
+    body { min-width: 1000px; }
+    .main { min-width: 1000px; width: 1000px; margin-top: 10px; }
+    .container-fluid { margin-top: 20px; }
+    input[type="color"] {
+        padding: 0 !important;
+        height: 32px;
+        width: 32px !important;
+        vertical-align: middle;
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
+        <div class="navbar-header">
+            <span class="navbar-brand">Tree Generator</span>
+        </div>
+    </nav>
+
+    <div class="main container">
+        <div class="row">
+            <div class="col-7">
+
+                <!-- The SVG area -->
+
+                <svg width="500" height="500"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <!-- TODO: Add your filters here -->
+                        <filter id="sky">
+                            <feTurbulence id="sky_noise" type="fractalNoise" baseFrequency="0.01" numOctaves="3"/>
+                            <feComponentTransfer>
+                                <feFuncR type="gamma"
+                                exponent="0.5"/>
+                                <feFuncG type="gamma"
+                                exponent="0.5"/>
+                                <feFuncB type="gamma"
+                                exponent="0.5" />
+                            </feComponentTransfer>
+                            <feColorMatrix id="sky_matrix" type="matrix"
+                                            values="
+                                            0.5 0 0 0 0
+                                            0 0.8 0 0 0
+                                            0 0 0.9 0 0
+                                            0 0 0 1 0"/>
+                        </filter>
+
+                        <filter id="random" color-interpolation-filters="sRGB">
+                            <feTurbulence id="tree_noise" type="fractalNoise"
+                            baseFrequency="0.01" numOctaves="1" result="noise"/>
+                            <feDisplacementMap id="displace" in="SourceGraphic"
+                                in2="noise" xChannelSelector="R"
+                                yChannelSelector="G" scale="20" />
+                        </filter>
+                    </defs>
+
+                    <rect x="0" y="0" width="500" height="500"
+                          filter="url(#sky)"/>
+
+                    <rect x="0" y="300" width="500" height="200"
+                          filter="url(#grass)"/>
+
+                    
+                    <g id="tree" filter="url(#random)"/>
+
+                    <!--<g id="tree"/>-->
+
+                    <rect x="0" y="400" width="500" height="100"
+                          filter="url(#grass)"/>
+                </svg>
+            </div>
+
+            <div class="col-5">
+
+                <!-- The controls area - tabs -->
+
+                <ul id="tab-controls" class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#texture-controls">Textures</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#lsystem-controls">L-System</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+
+                    <!-- The textures tab -->
+
+                    <div id="texture-controls" class="tab-pane active">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5>Sky Adjustments</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="cloud-color">Colour:</label>
+                                        <input id="cloud-color" class="form-control" type="color" value="#87cceb">
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label for="cloud-amount">Cloud Amount:</label>
+                                        <input id="cloud-amount" class="form-control form-control-sm"
+                                               type="number" value="1.2" min="0" max="10" step="0.1">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="cloud-amount">Frequency:</label>
+                                        <input id="cloud-frequency" class="form-control form-control-sm"
+                                               type="number" value="0.01" min="0.001" max="1" step="0.001">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5>Grass Adjustments</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="grass-color-1">Colour 1:</label>
+                                        <input id="grass-color-1" class="form-control" type="color" value="#194b19">
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="grass-color-2">Colour 2:</label>
+                                        <input id="grass-color-2" class="form-control" type="color" value="#4baf4b">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="grass-amount">Frequency:</label>
+                                        <input id="grass-frequency" class="form-control form-control-sm"
+                                               type="number" value="0.3" min="0.001" max="1" step="0.001">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button id="btnRefresh" class="btn btn-success btn-large"><i class="fas fa-sync-alt"></i> Refresh</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The L-system tab -->
+
+                    <div id="lsystem-controls" class="tab-pane">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5>L-System Settings</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group mt-3">
+                                        <!-- The l-system tabs -->
+                                        <ul id="lsystem-tabs" class="nav nav-pills small">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#lsystem-basic">Basic</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#lsystem-rules">Rules</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#lsystem-visual">Visual</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#lsystem-colors">Colours</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#lsystem-result">Result</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+
+                                        <!-- The basic tab -->
+
+                                        <div id="lsystem-basic" class="tab-pane active">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="lsystem-start">Starting String:</label>
+                                                        <input id="lsystem-start" class="form-control form-control-sm"
+                                                               type="text" value="F++F++F">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="lsystem-iterations">Number of Iterations:</label>
+                                                        <input id="lsystem-iterations" class="form-control form-control-sm"
+                                                               type="number" value="2" min="0" max="20" step="1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- The rules tab -->
+
+                                        <div id="lsystem-rules" class="tab-pane">
+                                            <div class="row lsystem-rule-row">
+                                                <div class="col-10">
+                                                    <div class="input-group input-group-sm">
+                                                        <input id="lsystem-rule-symbol-1" class="form-control" style="max-width: 40px"
+                                                               type="text" value="F" maxlength="1" size="4">
+                                                        <div class="input-group-prepend input-group-append">
+                                                            <span class="input-group-text">→</span>
+                                                        </div>
+                                                        <input id="lsystem-rule-replacement-1" class="form-control"
+                                                               type="text" value="F-F++F-F" placeholder="... replaced to ..." size="50">
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group form-group-sm">
+                                                        <button type="button" class="btn btn-sm btn-danger lsystem-rule-delete">
+                                                            <span class="fas fa-trash-alt"></span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="add-rule-row" class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <button id="lsystem-add-rule-button" class="btn btn-sm btn-light w-100" type="button">
+                                                            <span class="fas fa-plus"> </span> Add more rules</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- The visual tab -->
+
+                                        <div id="lsystem-visual" class="tab-pane">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="lsystem-length">Length:</label>
+                                                        <input id="lsystem-length" class="form-control form-control-sm"
+                                                               type="number" value="20" min="1" max="100" step="1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="lsystem-angle">Angle:</label>
+                                                        <input id="lsystem-angle" class="form-control form-control-sm"
+                                                               type="number" value="60" min="0" max="360" step="1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="lsystem-width">Width:</label>
+                                                        <input id="lsystem-width" class="form-control form-control-sm"
+                                                               type="number" value="3" min="1" max="50" step="1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="length-ratio">Length Ratio:</label>
+                                                        <input id="length-ratio" class="form-control form-control-sm"
+                                                               type="number" value="0.8" min="0" max="1" step="0.1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="width-ratio">Width Ratio:</label>
+                                                        <input id="width-ratio" class="form-control form-control-sm"
+                                                               type="number" value="0.8" min="0" max="1" step="0.1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="random-frequency">Random Frequency:</label>
+                                                        <input id="random-frequency" class="form-control form-control-sm"
+                                                               type="number" value="0.01" min="0.001" max="1" step="0.001">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="random-strength">Random Strength:</label>
+                                                        <input id="random-strength" class="form-control form-control-sm"
+                                                               type="number" value="10" min="1" max="100" step="1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- The colours tab -->
+
+                                        <div id="lsystem-colors" class="tab-pane">
+                                            <div class="row lsystem-color-row">
+                                                <div class="col-5">
+                                                    <div class="input-group input-group-sm">
+                                                        <input id="lsystem-color-symbol-1" class="form-control" style="max-width: 40px"
+                                                               type="text" value="F" maxlength="1" size="4">
+                                                        <div class="input-group-prepend input-group-append">
+                                                            <span class="input-group-text">uses</span>
+                                                        </div>
+                                                        <input id="lsystem-color-color-1" class="form-control" type="color" value="#80ffff">
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group form-group-sm">
+                                                        <button type="button" class="btn btn-sm btn-danger lsystem-color-delete">
+                                                            <span class="fas fa-trash-alt"></span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="add-color-row" class="row">
+                                                <div class="col-7">
+                                                    <div class="form-group">
+                                                        <button id="lsystem-add-color-button" class="btn btn-sm btn-light w-100" type="button">
+                                                            <span class="fas fa-plus"> </span> Add more colours</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- The result tab -->
+
+                                        <div id="lsystem-result" class="tab-pane">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="lsystem-result-string">Result String:</label>
+                                                        <textarea id="lsystem-result-string" class="form-control form-control-sm" rows="5"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button id="btnDrawTree" class="btn btn-success btn-large">
+                                        <i class="fas fa-tree"></i> Draw Tree</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <script src="lib/jquery-3.4.1.slim.min.js"></script>
+    <script src="lib/popper-1.16.0.min.js"></script>
+    <script src="lib/bootstrap-4.4.1.min.js"></script>
+    <script src="lib/bootstrap4-toggle-3.6.0.min.js"></script>
+
+    <script src="js/textures.js"></script>
+    <script src="js/turtle.js"></script>
+    <script src="js/lsystem.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
