@@ -23,7 +23,34 @@ function refreshTextures() {
      * TODO: Add your code here to adjust the cloud texture and grass texture
      **/
      $("#sky_noise").attr("baseFrequency",cloudFrequency);
+     $("#sky_transfer").children().first().attr("exponent",cloudAmount);
+     $("#sky_transfer").children().last().attr("exponent",-cloudAmount);
 
-     var matrix = cloudColor[0]+" 0 0 0 0" + " 0 "+cloudColor[1]+" 0 0 0"+" 0 0 "+cloudColor[2]+" 0 0 0"+" 0 0 0 1 0";
-     $("#sky_matrix").attr("value",matrix);
+    // var sky_matrix =  "1 0 0 0 0 "+
+    //                   "1 0 0 0 0 "+
+    //                   "1 0 0 0 0 "+
+    //                   "0 0 0 1 0";
+
+     // var sky_matrix = (1-cloudColor[0])+" 0 0 0 "+cloudColor[0]+" "+
+     //                  "0 "+(1-cloudColor[1])+" 0 0 "+cloudColor[1]+" "+
+     //                  "0 0 "+(1-cloudColor[2])+" 0 "+cloudColor[2]+" "+
+     //                  "0 0 0 1 0";
+
+     // var sky_matrix = (1-cloudColor[0])+" 0 0 0 "+cloudColor[0]+" "+
+     //                  "0 0 0 0 0 "+
+     //                  "0 0 0 0 0 "+
+     //                  "0 0 0 1 0";
+
+     var sky_matrix = (1-cloudColor[0])+" 0 0 0 "+cloudColor[0]+" "+
+                      (1-cloudColor[1])+" 0 0 0 "+cloudColor[1]+" "+
+                      (1-cloudColor[2])+" 0 0 0 "+cloudColor[2]+" "+
+                      "0 0 0 1 0";
+     $("#sky_matrix").attr("values",sky_matrix);
+
+     var grass_matrix = (grassColor1[0]-grassColor2[0])+" 0 0 0 "+grassColor2[0]+" "+
+                        (grassColor1[1]-grassColor2[1])+" 0 0 0 "+grassColor2[1]+" "+
+                        (grassColor1[2]-grassColor2[2])+" 0 0 0 "+grassColor2[2]+" "+
+                        "0 0 0 5 0";
+     $("#grass_matrix").attr("values",grass_matrix);
+     $("#grass_noise").attr("baseFrequency",grassFrequency);
 }

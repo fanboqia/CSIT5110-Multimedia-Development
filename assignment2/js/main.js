@@ -103,4 +103,7 @@ $(document).ready(function() {
 
     // Make the turtle for drawing
     turtle = new Turtle($("#tree"));
+
+    refreshTextures();
+    //drawTree();
 });

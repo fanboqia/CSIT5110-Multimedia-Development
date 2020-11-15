@@ -38,23 +38,32 @@
                 <svg width="500" height="500"
                      xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <!-- TODO: Add your filters here -->
-                        <filter id="sky">
+                        <filter id="sky" color-interpolation-filters="sRGB">
                             <feTurbulence id="sky_noise" type="fractalNoise" baseFrequency="0.01" numOctaves="3"/>
-                            <feComponentTransfer>
+                            <feComponentTransfer id="sky_transfer">
                                 <feFuncR type="gamma"
                                 exponent="0.5"/>
-                                <feFuncG type="gamma"
-                                exponent="0.5"/>
-                                <feFuncB type="gamma"
-                                exponent="0.5" />
+                                <feFuncA type="gamma"
+                                exponent="-0.5"/>
                             </feComponentTransfer>
                             <feColorMatrix id="sky_matrix" type="matrix"
-                                            values="
-                                            0.5 0 0 0 0
-                                            0 0.8 0 0 0
-                                            0 0 0.9 0 0
-                                            0 0 0 1 0"/>
+                                            values="0 0 0 0 0.5294117647058824 0 0 0 0 0.8 0 0 0 0 0.9215686274509803 0 0 0 1 0"/>
+                        </filter>
+
+                        <filter id="grass" color-interpolation-filters="sRGB">
+                            
+
+                            <feTurbulence id="grass_noise" type="fractalNoise" result="grass_noise" baseFrequency="0.3" numOctaves="3"/>  
+
+                            <feColorMatrix id="grass_matrix" type="matrix" result="grass_matrix" in="grass_noise"
+                                            values="-0.19607843137254904 0 0 0 0.29411764705882354 -0.39215686274509803 0 0 0 0.6862745098039216 -0.19607843137254904 0 0 0 0.29411764705882354 0 0 0 1 0"/>
+
+                            <feOffset dx="15" dy="15" x="-10%" y="0%" width="120%" height="110%" in="grass_matrix" result="offset1"/>
+
+                            <feDisplacementMap id="displace_grass" in="offset1"
+                                in2="grass_noise" xChannelSelector="G"
+                                yChannelSelector="B" scale="20" result="displace_grass"/>
+            
                         </filter>
 
                         <filter id="random" color-interpolation-filters="sRGB">
@@ -72,7 +81,6 @@
                     <rect x="0" y="300" width="500" height="200"
                           filter="url(#grass)"/>
 
-                    
                     <g id="tree" filter="url(#random)"/>
 
                     <!--<g id="tree"/>-->
@@ -206,14 +214,14 @@
                                                     <div class="form-group">
                                                         <label for="lsystem-start">Starting String:</label>
                                                         <input id="lsystem-start" class="form-control form-control-sm"
-                                                               type="text" value="F++F++F">
+                                                               type="text" value="F0[+A1][F1A1][-A1]">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="lsystem-iterations">Number of Iterations:</label>
                                                         <input id="lsystem-iterations" class="form-control form-control-sm"
-                                                               type="number" value="2" min="0" max="20" step="1">
+                                                               type="number" value="5" min="0" max="20" step="1">
                                                     </div>
                                                 </div>
                                             </div>
@@ -226,12 +234,12 @@
                                                 <div class="col-10">
                                                     <div class="input-group input-group-sm">
                                                         <input id="lsystem-rule-symbol-1" class="form-control" style="max-width: 40px"
-                                                               type="text" value="F" maxlength="1" size="4">
+                                                               type="text" value="A" maxlength="1" size="4">
                                                         <div class="input-group-prepend input-group-append">
                                                             <span class="input-group-text">→</span>
                                                         </div>
                                                         <input id="lsystem-rule-replacement-1" class="form-control"
-                                                               type="text" value="F-F++F-F" placeholder="... replaced to ..." size="50">
+                                                               type="text" value="F0[+A1][F1A1][-A1]" placeholder="... replaced to ..." size="50">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
@@ -259,21 +267,21 @@
                                                     <div class="form-group">
                                                         <label for="lsystem-length">Length:</label>
                                                         <input id="lsystem-length" class="form-control form-control-sm"
-                                                               type="number" value="20" min="1" max="100" step="1">
+                                                               type="number" value="55" min="1" max="100" step="1">
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="lsystem-angle">Angle:</label>
                                                         <input id="lsystem-angle" class="form-control form-control-sm"
-                                                               type="number" value="60" min="0" max="360" step="1">
+                                                               type="number" value="30" min="0" max="360" step="1">
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="lsystem-width">Width:</label>
                                                         <input id="lsystem-width" class="form-control form-control-sm"
-                                                               type="number" value="3" min="1" max="50" step="1">
+                                                               type="number" value="10" min="1" max="50" step="1">
                                                     </div>
                                                 </div>
                                             </div>
@@ -289,7 +297,7 @@
                                                     <div class="form-group">
                                                         <label for="width-ratio">Width Ratio:</label>
                                                         <input id="width-ratio" class="form-control form-control-sm"
-                                                               type="number" value="0.8" min="0" max="1" step="0.1">
+                                                               type="number" value="0.6" min="0" max="1" step="0.1">
                                                     </div>
                                                 </div>
                                             </div>
@@ -298,14 +306,14 @@
                                                     <div class="form-group">
                                                         <label for="random-frequency">Random Frequency:</label>
                                                         <input id="random-frequency" class="form-control form-control-sm"
-                                                               type="number" value="0.01" min="0.001" max="1" step="0.001">
+                                                               type="number" value="0.02" min="0.001" max="1" step="0.001">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="random-strength">Random Strength:</label>
                                                         <input id="random-strength" class="form-control form-control-sm"
-                                                               type="number" value="10" min="1" max="100" step="1">
+                                                               type="number" value="30" min="1" max="100" step="1">
                                                     </div>
                                                 </div>
                                             </div>
@@ -322,7 +330,25 @@
                                                         <div class="input-group-prepend input-group-append">
                                                             <span class="input-group-text">uses</span>
                                                         </div>
-                                                        <input id="lsystem-color-color-1" class="form-control" type="color" value="#80ffff">
+                                                        <input id="lsystem-color-color-1" class="form-control" type="color" value="#693b00">
+                                                    </div>
+                                                </div>
+                                                <div class="col-2">
+                                                    <div class="form-group form-group-sm">
+                                                        <button type="button" class="btn btn-sm btn-danger lsystem-color-delete">
+                                                            <span class="fas fa-trash-alt"></span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row lsystem-color-row">
+                                                <div class="col-5">
+                                                    <div class="input-group input-group-sm">
+                                                        <input id="lsystem-color-symbol-2" class="form-control" style="max-width: 40px"
+                                                               type="text" value="A" maxlength="1" size="4">
+                                                        <div class="input-group-prepend input-group-append">
+                                                            <span class="input-group-text">uses</span>
+                                                        </div>
+                                                        <input id="lsystem-color-color-2" class="form-control" type="color" value="#fb7b04">
                                                     </div>
                                                 </div>
                                                 <div class="col-2">
